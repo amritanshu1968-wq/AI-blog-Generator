@@ -1,0 +1,7 @@
+Flask
+groq
+python-dotenv
+gunicorn
+python-docx
+reportlab
+markdown

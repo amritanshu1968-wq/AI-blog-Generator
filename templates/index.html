@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog Generator - Generate SEO-Friendly Blogs with AI</title>
+    <meta name="description" content="Generate SEO-friendly, high-quality blogs in seconds with AI.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Default Theme: Deep Space Neon (Enhanced Vibrant Purple & Electric Blue) */
+            --bg-gradient: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #06b6d4;
+            --accent-glow: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(168, 85, 247, 0.3);
+            --card-border-hover: rgba(6, 182, 212, 0.6);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-highlight: #38bdf8;
+            --input-bg: rgba(15, 23, 42, 0.85);
+            --select-option-bg: #0f172a;
+            --select-option-text: #f8fafc;
+            --chip-bg: rgba(168, 85, 247, 0.18);
+            --chip-hover: rgba(6, 182, 212, 0.3);
+            --success-color: #10b981;
+            --warning-color: #f43f5e;
+            --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.35);
+            --glass-blur: blur(18px) saturate(190%);
+            --radius-lg: 22px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Theme: Cyberpunk Neon */
+        .theme-cyberpunk {
+            --bg-gradient: radial-gradient(circle at 80% 20%, #3b0764 0%, #1e0b36 50%, #090214 100%);
+            --accent-primary: #ec4899;
+            --accent-secondary: #facc15;
+            --accent-glow: linear-gradient(135deg, #ec4899 0%, #facc15 100%);
+            --card-bg: rgba(35, 5, 45, 0.75);
+            --card-border: rgba(236, 72, 153, 0.35);
+            --card-border-hover: rgba(250, 204, 21, 0.65);
+            --text-main: #fff0f7;
+            --text-muted: #e9d5ff;
+            --text-highlight: #fde047;
+            --input-bg: rgba(24, 4, 32, 0.85);
+            --select-option-bg: #1e0b36;
+            --select-option-text: #fff0f7;
+            --chip-bg: rgba(236, 72, 153, 0.2);
+            --chip-hover: rgba(250, 204, 21, 0.35);
+            --shadow-glow: 0 0 30px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Theme: Emerald Tech */
+        .theme-emerald {
+            --bg-gradient: radial-gradient(circle at 50% 10%, #064e3b 0%, #022c22 50%, #02120d 100%);
+            --accent-primary: #10b981;
+            --accent-secondary: #14b8a6;
+            --accent-glow: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --card-bg: rgba(6, 38, 30, 0.75);
+            --card-border: rgba(16, 185, 129, 0.35);
+            --card-border-hover: rgba(52, 211, 153, 0.65);
+            --text-main: #f0fdf4;
+            --text-muted: #a7f3d0;
+            --text-highlight: #34d399;
+            --input-bg: rgba(3, 24, 18, 0.85);
+            --select-option-bg: #022c22;
+            --select-option-text: #f0fdf4;
+            --chip-bg: rgba(16, 185, 129, 0.18);
+            --chip-hover: rgba(20, 184, 166, 0.35);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.35);
+        }
+
+        /* Theme: Solar Sunset */
+        .theme-sunset {
+            --bg-gradient: radial-gradient(circle at 20% 80%, #450a0a 0%, #1c0505 50%, #070101 100%);
+            --accent-primary: #f97316;
+            --accent-secondary: #fbbf24;
+            --accent-glow: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+            --card-bg: rgba(48, 14, 14, 0.75);
+            --card-border: rgba(249, 115, 22, 0.35);
+            --card-border-hover: rgba(244, 63, 94, 0.65);
+            --text-main: #fff7ed;
+            --text-muted: #fed7aa;
+            --text-highlight: #fb923c;
+            --input-bg: rgba(28, 7, 7, 0.85);
+            --select-option-bg: #1c0505;
+            --select-option-text: #fff7ed;
+            --chip-bg: rgba(249, 115, 22, 0.18);
+            --chip-hover: rgba(244, 63, 94, 0.35);
+            --shadow-glow: 0 0 30px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Theme: Pure Light Glass */
+        .theme-light {
+            --bg-gradient: radial-gradient(circle at 10% 20%, #e0e7ff 0%, #f1f5f9 60%, #cbd5e1 100%);
+            --accent-primary: #4f46e5;
+            --accent-secondary: #0284c7;
+            --accent-glow: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+            --card-bg: rgba(255, 255, 255, 0.82);
+            --card-border: rgba(79, 70, 229, 0.25);
+            --card-border-hover: rgba(2, 132, 199, 0.5);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-highlight: #2563eb;
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --select-option-bg: #ffffff;
+            --select-option-text: #0f172a;
+            --chip-bg: rgba(79, 70, 229, 0.12);
+            --chip-hover: rgba(2, 132, 199, 0.25);
+            --shadow-glow: 0 10px 30px rgba(79, 70, 229, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        /* Ambient Dynamic Background Orbs */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            animation: floatOrb 18s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: 10%;
+            width: 480px;
+            height: 480px;
+            background: var(--accent-primary);
+        }
+
+        .orb-2 {
+            bottom: -15%;
+            right: 5%;
+            width: 580px;
+            height: 580px;
+            background: var(--accent-secondary);
+            animation-duration: 22s;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(45px, 65px) scale(1.1); }
+            100% { transform: translate(-35px, 35px) scale(0.95); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1.2rem;
+            border-radius: 50px;
+            background: var(--chip-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-highlight);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: var(--shadow-glow);
+        }
+
+        h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+            font-weight: 800;
+            background: var(--accent-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.18rem;
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Theme Selector Dock */
+        .theme-dock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.45rem 0.7rem;
+            border-radius: 50px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+        }
+
+        .theme-dock-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-left: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .theme-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.25);
+        }
+
+        .theme-btn.active {
+            border-color: var(--text-main);
+            transform: scale(1.18);
+            box-shadow: 0 0 12px var(--accent-primary);
+        }
+
+        .tb-deepspace { background: linear-gradient(135deg, #8b5cf6, #06b6d4); }
+        .tb-cyberpunk { background: linear-gradient(135deg, #ec4899, #facc15); }
+        .tb-emerald   { background: linear-gradient(135deg, #10b981, #34d399); }
+        .tb-sunset    { background: linear-gradient(135deg, #f97316, #f43f5e); }
+        .tb-light     { background: linear-gradient(135deg, #4f46e5, #0284c7); }
+
+        /* History Toggle Button */
+        .history-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .history-btn:hover {
+            border-color: var(--accent-secondary);
+            color: var(--text-highlight);
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 2.2rem;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .glass-card:hover {
+            border-color: var(--card-border-hover);
+        }
+
+        /* Input Section */
+        .input-title {
+            font-family: var(--font-head);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-main);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .input-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-secondary);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: var(--input-bg);
+            border: 1.5px solid var(--card-border);
+            border-radius: var(--radius-md);
+            font-size: 1.02rem;
+            font-family: var(--font-body);
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        select {
+            padding-left: 2.8rem;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2338bdf8' viewBox='0 0 16 16'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 1.2rem) center;
+        }
+
+        select option {
+            background: var(--select-option-bg);
+            color: var(--select-option-text);
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 18px rgba(6, 182, 212, 0.3);
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--text-muted);
+            opacity: 0.75;
+        }
+
+        .btn {
+            padding: 1rem 1.8rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-head);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .btn-glow {
+            background: var(--accent-glow);
+            color: #ffffff;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.12);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.55);
+        }
+
+        .btn-glow:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: var(--accent-secondary);
+            color: var(--text-highlight);
+        }
+
+        /* Quick Topic Chips */
+        .chips-container {
+            margin-top: 1.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            align-items: center;
+        }
+
+        .chips-label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-right: 0.2rem;
+        }
+
+        .chip {
+            padding: 0.48rem 0.95rem;
+            background: var(--chip-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.22s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .chip:hover {
+            background: var(--chip-hover);
+            border-color: var(--accent-secondary);
+            color: var(--text-highlight);
+            transform: translateY(-2px);
+        }
+
+        /* Loader & Animations */
+        .loader-wrapper {
+            display: none;
+            text-align: center;
+            padding: 2.5rem 0;
+        }
+
+        .spinner {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 1.2rem auto;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--accent-secondary);
+            border-right: 4px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: var(--font-head);
+            font-size: 1.12rem;
+            color: var(--text-highlight);
+            font-weight: 600;
+        }
+
+        .error-card {
+            display: none;
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            color: #fecdd3;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Output Section & Header */
+        .blog-section {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .blog-meta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .blog-topic-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Output Toolbar */
+        .blog-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-search {
+            position: relative;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .blog-search input {
+            padding: 0.6rem 0.8rem 0.6rem 2.4rem;
+            font-size: 0.9rem;
+            border-radius: 50px;
+        }
+
+        .blog-search i {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        /* Blog Section Display Cards */
+        .blog-section-card {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 1.6rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-section-card:hover {
+            border-color: var(--card-border-hover);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .blog-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .blog-section-title {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-highlight);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .blog-section-content {
+            font-size: 0.98rem;
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .blog-section-content p {
+            margin-bottom: 0.85rem;
+        }
+
+        .blog-section-content h3 {
+            font-family: var(--font-head);
+            font-size: 1.15rem;
+            color: var(--text-highlight);
+            margin: 1.2rem 0 0.5rem 0;
+        }
+
+        .blog-section-content ul, .blog-section-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .blog-section-content li {
+            margin-bottom: 0.35rem;
+        }
+
+        /* Fallback Raw Markdown Display Tab */
+        .raw-content {
+            display: none;
+            background: var(--input-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--card-border);
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            white-space: pre-wrap;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        /* History Drawer Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal-body {
+            background: var(--bg-gradient);
+            border: 1px solid var(--card-border-hover);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--warning-color);
+        }
+
+        .modal-content-area {
+            padding: 1.8rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Saved History List */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .history-item {
+            padding: 1rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            border-color: var(--accent-secondary);
+            transform: translateX(4px);
+        }
+
+        .history-item-title {
+            font-family: var(--font-head);
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .history-item-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Rating Stars */
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .star-icon {
+            font-size: 2.2rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star-icon:hover, .star-icon.active {
+            color: #f59e0b;
+            transform: scale(1.15);
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+        }
+
+        /* Toast Component */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-secondary);
+            color: var(--text-main);
+            padding: 0.8rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 2000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1.5rem 1rem; }
+            .grid-inputs { grid-template-columns: 1fr !important; }
+            .input-group { flex-direction: column; }
+            .theme-dock { top: 12px; right: 12px; }
+            .blog-toolbar { flex-direction: column; align-items: stretch; }
+            .blog-search { max-width: 100%; }
+            .action-group { justify-content: stretch; }
+            .action-group .btn { flex: 1; }
+        }
+    </style>
+</head>
+<body class="theme-deepspace">
+
+    <!-- Ambient Dynamic Glow Orbs -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Theme Dock -->
+    <div class="theme-dock">
+        <div class="theme-dock-label">
+            <i class="fas fa-palette"></i>
+        </div>
+        <button class="theme-btn tb-deepspace active" data-theme="deepspace" title="Deep Space Neon"></button>
+        <button class="theme-btn tb-cyberpunk" data-theme="cyberpunk" title="Cyberpunk Neon"></button>
+        <button class="theme-btn tb-emerald" data-theme="emerald" title="Emerald Tech"></button>
+        <button class="theme-btn tb-sunset" data-theme="sunset" title="Solar Sunset"></button>
+        <button class="theme-btn tb-light" data-theme="light" title="Pure Light Glass"></button>
+        <button class="history-btn" id="open-history-btn" style="margin-left: 0.4rem;">
+            <i class="fas fa-bookmark"></i> Saved
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="badge">
+                <i class="fas fa-bolt"></i> AI Writing Assistant
+            </div>
+            <h1>AI Blog Generator</h1>
+            <p class="subtitle">Generate SEO-friendly, high-quality blogs in seconds with AI.</p>
+        </header>
+
+        <!-- Main Input Card -->
+        <div class="glass-card">
+            <div class="input-title">
+                <i class="fas fa-pen-nib" style="color: var(--accent-secondary);"></i>
+                What do you want to write about?
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.2rem;">
+                <!-- Blog Topic Input -->
+                <div class="input-wrapper">
+                    <i class="fas fa-heading input-icon"></i>
+                    <input type="text" id="topic-input" placeholder="Blog Topic (e.g. 10 Proven AI Marketing Strategies for 2026)" autocomplete="off">
+                </div>
+
+                <!-- Target Keyword, Length, and Tone Grid -->
+                <div class="grid-inputs" style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0.8rem;">
+                    <div class="input-wrapper">
+                        <i class="fas fa-key input-icon"></i>
+                        <input type="text" id="keyword-input" placeholder="Target Keyword (e.g. AI marketing)" autocomplete="off">
+                    </div>
+
+                    <div class="input-wrapper">
+                        <i class="fas fa-ruler-horizontal input-icon"></i>
+                        <select id="length-select">
+                            <option value="Short">Short (~500 words)</option>
+                            <option value="Medium" selected>Medium (~1000 words)</option>
+                            <option value="Long">Long (~1500+ words)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <i class="fas fa-comments input-icon"></i>
+                        <select id="tone-select">
+                            <option value="Professional" selected>Professional</option>
+                            <option value="Friendly">Friendly</option>
+                            <option value="Casual">Casual</option>
+                            <option value="Technical">Technical</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Additional Instructions & Action Button Row -->
+                <div class="input-group" style="margin-top: 0;">
+                    <div class="input-wrapper">
+                        <i class="fas fa-sliders input-icon"></i>
+                        <input type="text" id="instructions-input" placeholder="Additional Instructions (e.g. Include statistics, bullet points, engaging subheadings...)" autocomplete="off">
+                    </div>
+                    <button class="btn btn-glow" id="generate-btn">
+                        <i class="fas fa-wand-magic-sparkles"></i> Generate Blog
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Topic Chips -->
+            <div class="chips-container">
+                <span class="chips-label">Popular Topics:</span>
+                <div class="chip" data-topic="Artificial Intelligence">🤖 Artificial Intelligence</div>
+                <div class="chip" data-topic="Technology">💻 Technology</div>
+                <div class="chip" data-topic="Digital Marketing">📈 Digital Marketing</div>
+                <div class="chip" data-topic="Finance">💰 Finance</div>
+                <div class="chip" data-topic="Health & Fitness">🏋️ Health & Fitness</div>
+                <div class="chip" data-topic="Travel">✈️ Travel</div>
+                <div class="chip" data-topic="Education">🎓 Education</div>
+                <div class="chip" data-topic="Programming">👨‍💻 Programming</div>
+            </div>
+
+            <!-- Loader State -->
+            <div class="loader-wrapper" id="loader">
+                <div class="spinner"></div>
+                <div class="loading-text" id="loading-status">Drafting SEO title, meta description & blog content...</div>
+            </div>
+
+            <!-- Error Banner -->
+            <div class="error-card" id="error-message"></div>
+        </div>
+
+        <!-- Blog Output Section -->
+        <div class="glass-card blog-section" id="blog-section">
+            
+            <!-- Meta Header -->
+            <div class="blog-meta-header">
+                <div class="blog-topic-title" id="blog-topic-display">
+                    <i class="fas fa-newspaper" style="color: var(--accent-secondary);"></i>
+                    <span>Generated Blog</span>
+                </div>
+                <div class="badge" id="model-badge">
+                    <i class="fas fa-brain"></i> AI Powered
+                </div>
+            </div>
+
+            <!-- Interactive Toolbar & Actions -->
+            <div class="blog-toolbar">
+                <div class="blog-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="filter-input" placeholder="Search in generated blog...">
+                </div>
+                <div class="action-group">
+                    <button class="btn btn-secondary" id="copy-btn" title="Copy full blog">
+                        <i class="fas fa-copy"></i> Copy Blog
+                    </button>
+                    <button class="btn btn-secondary" id="download-btn" title="Download text file">
+                        <i class="fas fa-download"></i> Save File
+                    </button>
+                    <button class="btn btn-secondary" id="toggle-view-btn" title="Toggle raw markdown text view">
+                        <i class="fas fa-code"></i> Raw View
+                    </button>
+                    <button class="btn btn-glow" id="rate-modal-btn">
+                        <i class="fas fa-star"></i> Rate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visual Formatted Sections Display -->
+            <div id="blog-formatted-view">
+                <!-- SEO Title Section -->
+                <div class="blog-section-card" id="sec-seo-title">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-heading"></i> SEO Title</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="seo-title-content" data-name="SEO Title" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="seo-title-content"></div>
+                </div>
+
+                <!-- Meta Description Section -->
+                <div class="blog-section-card" id="sec-meta-desc">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-tags"></i> Meta Description</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="meta-desc-content" data-name="Meta Description" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="meta-desc-content"></div>
+                </div>
+
+                <!-- Introduction Section -->
+                <div class="blog-section-card" id="sec-intro">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-rocket"></i> Introduction</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="intro-content" data-name="Introduction" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="intro-content"></div>
+                </div>
+
+                <!-- Main Blog Content Section -->
+                <div class="blog-section-card" id="sec-main-content">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-align-left"></i> Main Blog Content</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="main-content-body" data-name="Main Blog Content" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="main-content-body"></div>
+                </div>
+
+                <!-- Conclusion Section -->
+                <div class="blog-section-card" id="sec-conclusion">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-flag-checkered"></i> Conclusion</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="conclusion-content" data-name="Conclusion" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="conclusion-content"></div>
+                </div>
+
+                <!-- FAQs Section -->
+                <div class="blog-section-card" id="sec-faqs">
+                    <div class="blog-section-header">
+                        <div class="blog-section-title"><i class="fas fa-circle-question"></i> Frequently Asked Questions (FAQs)</div>
+                        <button class="btn btn-secondary sec-copy-btn" data-target="faqs-content" data-name="FAQs" style="padding: 0.3rem 0.7rem; font-size: 0.8rem;"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="blog-section-content" id="faqs-content"></div>
+                </div>
+            </div>
+
+            <!-- Raw Content Fallback -->
+            <div id="raw-view" class="raw-content"></div>
+        </div>
+
+        <footer>
+            <p>© 2026 AI Blog Generator & Advanced AI</p>
+        </footer>
+    </div>
+
+    <!-- Rating Modal -->
+    <div class="modal-overlay" id="rating-modal">
+        <div class="modal-body">
+            <div class="modal-header">
+                <div class="modal-title">Rate Your Generated Blog</div>
+                <button class="close-btn" id="close-rating-modal">&times;</button>
+            </div>
+            <div class="modal-content-area" style="text-align: center;">
+                <p style="color: var(--text-muted); font-size: 1rem;">How satisfied are you with the generated SEO blog post?</p>
+                <div class="rating-stars" id="star-rating-box">
+                    <i class="fas fa-star star-icon" data-rating="1"></i>
+                    <i class="fas fa-star star-icon" data-rating="2"></i>
+                    <i class="fas fa-star star-icon" data-rating="3"></i>
+                    <i class="fas fa-star star-icon" data-rating="4"></i>
+                    <i class="fas fa-star star-icon" data-rating="5"></i>
+                </div>
+                <button class="btn btn-glow" id="submit-rating-btn" style="margin-top: 1rem; width: 100%;">Submit Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved History Modal -->
+    <div class="modal-overlay" id="history-modal">
+        <div class="modal-body">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-bookmark" style="color: var(--accent-secondary);"></i> Saved Blogs</div>
+                <button class="close-btn" id="close-history-modal">&times;</button>
+            </div>
+            <div class="modal-content-area">
+                <div class="history-list" id="history-items-container">
+                    <p style="color: var(--text-muted); text-align: center;">No saved blogs yet. Generate one to save!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Component -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form Elements
+            const topicInput = document.getElementById('topic-input');
+            const keywordInput = document.getElementById('keyword-input');
+            const lengthSelect = document.getElementById('length-select');
+            const toneSelect = document.getElementById('tone-select');
+            const instructionsInput = document.getElementById('instructions-input');
+            const generateBtn = document.getElementById('generate-btn');
+            const loader = document.getElementById('loader');
+            const errorMessage = document.getElementById('error-message');
+
+            // Output Display Elements
+            const blogSection = document.getElementById('blog-section');
+            const blogTopicDisplay = document.getElementById('blog-topic-display');
+            const modelBadge = document.getElementById('model-badge');
+            const blogFormattedView = document.getElementById('blog-formatted-view');
+            const rawView = document.getElementById('raw-view');
+            const filterInput = document.getElementById('filter-input');
+
+            // Blog Section Content Elements
+            const seoTitleContent = document.getElementById('seo-title-content');
+            const metaDescContent = document.getElementById('meta-desc-content');
+            const introContent = document.getElementById('intro-content');
+            const mainContentBody = document.getElementById('main-content-body');
+            const conclusionContent = document.getElementById('conclusion-content');
+            const faqsContent = document.getElementById('faqs-content');
+
+            // Control Buttons
+            const copyBtn = document.getElementById('copy-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const toggleViewBtn = document.getElementById('toggle-view-btn');
+            const rateModalBtn = document.getElementById('rate-modal-btn');
+            const ratingModal = document.getElementById('rating-modal');
+            const closeRatingModal = document.getElementById('close-rating-modal');
+            const submitRatingBtn = document.getElementById('submit-rating-btn');
+            const openHistoryBtn = document.getElementById('open-history-btn');
+            const historyModal = document.getElementById('history-modal');
+            const closeHistoryModal = document.getElementById('close-history-modal');
+            const historyItemsContainer = document.getElementById('history-items-container');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            let currentBlogText = '';
+            let currentTopic = '';
+            let isRawView = false;
+            let currentRating = 0;
+
+            // --- Theme Switcher ---
+            const themeBtns = document.querySelectorAll('.theme-btn');
+            const savedTheme = localStorage.getItem('app_theme') || 'deepspace';
+
+            function applyTheme(themeName) {
+                document.body.className = `theme-${themeName}`;
+                themeBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                });
+                localStorage.setItem('app_theme', themeName);
+            }
+
+            applyTheme(savedTheme);
+
+            themeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const themeName = btn.getAttribute('data-theme');
+                    applyTheme(themeName);
+                    showToast(`Theme switched to ${btn.title || themeName}`, 'fa-palette');
+                });
+            });
+
+            // --- Toast Handler ---
+            function showToast(msg, iconClass = 'fa-check-circle') {
+                toastMessage.textContent = msg;
+                toast.querySelector('i').className = `fas ${iconClass}`;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2800);
+            }
+
+            // --- Topic Chips Handler ---
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const topic = chip.getAttribute('data-topic');
+                    topicInput.value = topic;
+                    topicInput.focus();
+                    showToast(`Selected "${topic}"`, 'fa-pen-nib');
+                });
+            });
+
+            // Keyboard Enter Shortcuts
+            [topicInput, keywordInput, instructionsInput].forEach(inputEl => {
+                inputEl.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') generateBtn.click();
+                });
+            });
+
+            // --- Generate Blog API Call ---
+            generateBtn.addEventListener('click', generateBlog);
+
+            async function generateBlog() {
+                const topic = topicInput.value.trim();
+                const keyword = keywordInput.value.trim();
+                const length = lengthSelect.value;
+                const tone = toneSelect.value;
+                const instructions = instructionsInput.value.trim();
+
+                if (!topic) {
+                    showError('Please enter a blog topic.');
+                    topicInput.focus();
+                    return;
+                }
+
+                clearError();
+                showLoading(true);
+
+                try {
+                    const bodyParams = new URLSearchParams({
+                        topic: topic,
+                        keyword: keyword,
+                        length: length,
+                        tone: tone,
+                        instructions: instructions
+                    });
+
+                    const response = await fetch('/generate_blog', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: bodyParams.toString()
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok || data.error) {
+                        throw new Error(data.error || data.details || 'Failed to generate blog.');
+                    }
+
+                    currentBlogText = data.blog;
+                    currentTopic = topic;
+
+                    // Render Topic & Model
+                    blogTopicDisplay.innerHTML = `<i class="fas fa-newspaper" style="color: var(--accent-secondary);"></i> ${escapeHtml(topic)}`;
+                    if (data.model_used) {
+                        modelBadge.innerHTML = `<i class="fas fa-brain"></i> ${data.model_used}`;
+                    }
+
+                    // Render Sections & Raw text
+                    rawView.textContent = currentBlogText;
+                    renderBlogSections(currentBlogText);
+
+                    blogSection.style.display = 'block';
+                    blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    // Save to Local Storage History
+                    saveToHistory(topic, currentBlogText);
+                    showToast('Blog generated & saved!', 'fa-wand-magic-sparkles');
+
+                } catch (err) {
+                    console.error(err);
+                    showError(err.message || 'An unexpected error occurred. Please check your network or backend logs.');
+                } finally {
+                    showLoading(false);
+                }
+            }
+
+            // --- Robust Parse and Render Blog Sections ---
+            function renderBlogSections(fullText) {
+                const sections = parseBlogSections(fullText);
+
+                seoTitleContent.innerHTML = renderMarkdownToHtml(sections.seoTitle || currentTopic);
+                metaDescContent.innerHTML = renderMarkdownToHtml(sections.metaDesc);
+                introContent.innerHTML = renderMarkdownToHtml(sections.intro);
+                mainContentBody.innerHTML = renderMarkdownToHtml(sections.mainContent);
+                conclusionContent.innerHTML = renderMarkdownToHtml(sections.conclusion);
+                faqsContent.innerHTML = renderMarkdownToHtml(sections.faqs);
+            }
+
+            function parseBlogSections(text) {
+                const lines = text.split('\n');
+                let currentKey = 'mainContent';
+
+                const buffer = {
+                    seoTitle: [],
+                    metaDesc: [],
+                    intro: [],
+                    mainContent: [],
+                    conclusion: [],
+                    faqs: []
+                };
+
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    const lower = trimmed.toLowerCase();
+
+                    if (lower.match(/^#+\s*seo title/i) || lower.match(/^#+\s*title/i) && !buffer.seoTitle.length) {
+                        currentKey = 'seoTitle';
+                    } else if (lower.match(/^#+\s*meta description/i) || lower.match(/^#+\s*meta/i)) {
+                        currentKey = 'metaDesc';
+                    } else if (lower.match(/^#+\s*introduction/i) || lower.match(/^#+\s*intro/i)) {
+                        currentKey = 'intro';
+                    } else if (lower.match(/^#+\s*main blog content/i) || lower.match(/^#+\s*main content/i) || lower.match(/^#+\s*body/i)) {
+                        currentKey = 'mainContent';
+                    } else if (lower.match(/^#+\s*conclusion/i) || lower.match(/^#+\s*summary/i)) {
+                        currentKey = 'conclusion';
+                    } else if (lower.match(/^#+\s*faqs/i) || lower.match(/^#+\s*faq/i) || lower.match(/^#+\s*frequently asked questions/i)) {
+                        currentKey = 'faqs';
+                    } else if (currentKey) {
+                        buffer[currentKey].push(line);
+                    }
+                });
+
+                // Fallback for empty main content
+                const mainContentStr = buffer.mainContent.join('\n').trim();
+                const fallbackMain = mainContentStr || text;
+
+                return {
+                    seoTitle: buffer.seoTitle.join('\n').trim(),
+                    metaDesc: buffer.metaDesc.join('\n').trim(),
+                    intro: buffer.intro.join('\n').trim(),
+                    mainContent: fallbackMain,
+                    conclusion: buffer.conclusion.join('\n').trim(),
+                    faqs: buffer.faqs.join('\n').trim()
+                };
+            }
+
+            function renderMarkdownToHtml(mdText) {
+                if (!mdText) return '<p style="color: var(--text-muted); font-style: italic;">No content provided for this section.</p>';
+
+                let html = mdText
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^## (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^# (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/`(.*?)`/g, '<code style="background: rgba(255,255,255,0.12); padding: 2px 6px; border-radius: 4px; color: var(--text-highlight);">$1</code>');
+
+                const paragraphs = html.split(/\n\n+/);
+                const formatted = paragraphs.map(p => {
+                    const trimmed = p.trim();
+                    if (!trimmed) return '';
+                    if (trimmed.startsWith('<h3>')) return trimmed;
+                    if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || trimmed.match(/^\d+\.\s/)) {
+                        const listItems = trimmed.split('\n').map(li => {
+                            const clean = li.replace(/^[-*\d\.]+\s*/, '');
+                            return `<li>${clean}</li>`;
+                        }).join('');
+                        return `<ul>${listItems}</ul>`;
+                    }
+                    return `<p>${trimmed.replace(/\n/g, '<br>')}</p>`;
+                });
+
+                return formatted.join('');
+            }
+
+            // Section Copy Buttons
+            document.querySelectorAll('.sec-copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const sectionName = btn.getAttribute('data-name') || 'Section';
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        const textToCopy = targetEl.innerText || targetEl.textContent;
+                        navigator.clipboard.writeText(textToCopy);
+                        showToast(`Copied ${sectionName}!`, 'fa-copy');
+                    }
+                });
+            });
+
+            // --- Search / Live Filter in Generated Blog ---
+            filterInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const sectionCards = document.querySelectorAll('.blog-section-card');
+
+                sectionCards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (!query || text.includes(query)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // --- Copy & Export Handlers ---
+            copyBtn.addEventListener('click', () => {
+                if (!currentBlogText) return;
+                navigator.clipboard.writeText(currentBlogText);
+                showToast('Full blog copied to clipboard!', 'fa-copy');
+            });
+
+            downloadBtn.addEventListener('click', () => {
+                if (!currentBlogText) return;
+                const blob = new Blob([currentBlogText], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Blog_${currentTopic.replace(/[^a-zA-Z0-9]/g, '_')}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Blog file downloaded!', 'fa-download');
+            });
+
+            toggleViewBtn.addEventListener('click', () => {
+                isRawView = !isRawView;
+                if (isRawView) {
+                    blogFormattedView.style.display = 'none';
+                    rawView.style.display = 'block';
+                    toggleViewBtn.innerHTML = '<i class="fas fa-layer-group"></i> Visual View';
+                } else {
+                    rawView.style.display = 'none';
+                    blogFormattedView.style.display = 'block';
+                    toggleViewBtn.innerHTML = '<i class="fas fa-code"></i> Raw View';
+                }
+            });
+
+            // --- Local Storage Saved History ---
+            function saveToHistory(topic, blog) {
+                let history = JSON.parse(localStorage.getItem('blog_history') || '[]');
+                history = history.filter(item => item.topic.toLowerCase() !== topic.toLowerCase());
+                history.unshift({
+                    topic: topic,
+                    blog: blog,
+                    date: new Date().toLocaleDateString()
+                });
+                if (history.length > 10) history.pop();
+                localStorage.setItem('blog_history', JSON.stringify(history));
+                renderHistoryModal();
+            }
+
+            function renderHistoryModal() {
+                const history = JSON.parse(localStorage.getItem('blog_history') || '[]');
+                if (history.length === 0) {
+                    historyItemsContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center;">No saved blogs yet.</p>';
+                    return;
+                }
+
+                historyItemsContainer.innerHTML = '';
+                history.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'history-item';
+                    div.innerHTML = `
+                        <div>
+                            <div class="history-item-title">${escapeHtml(item.topic)}</div>
+                            <div class="history-item-date">${item.date}</div>
+                        </div>
+                        <i class="fas fa-arrow-right" style="color: var(--accent-secondary);"></i>
+                    `;
+                    div.addEventListener('click', () => {
+                        currentBlogText = item.blog;
+                        currentTopic = item.topic;
+                        blogTopicDisplay.innerHTML = `<i class="fas fa-newspaper" style="color: var(--accent-secondary);"></i> ${escapeHtml(item.topic)}`;
+                        rawView.textContent = currentBlogText;
+                        renderBlogSections(currentBlogText);
+                        blogSection.style.display = 'block';
+                        historyModal.style.display = 'none';
+                        showToast(`Loaded "${item.topic}"`, 'fa-bookmark');
+                    });
+                    historyItemsContainer.appendChild(div);
+                });
+            }
+
+            openHistoryBtn.addEventListener('click', () => {
+                renderHistoryModal();
+                historyModal.style.display = 'flex';
+            });
+            closeHistoryModal.addEventListener('click', () => historyModal.style.display = 'none');
+
+            // --- Rating Modal Handlers ---
+            rateModalBtn.addEventListener('click', () => ratingModal.style.display = 'flex');
+            closeRatingModal.addEventListener('click', () => ratingModal.style.display = 'none');
+
+            const stars = document.querySelectorAll('.star-icon');
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    currentRating = parseInt(star.getAttribute('data-rating'));
+                    stars.forEach((s, idx) => {
+                        s.classList.toggle('active', idx < currentRating);
+                    });
+                });
+            });
+
+            submitRatingBtn.addEventListener('click', () => {
+                if (currentRating === 0) {
+                    showToast('Please select a star rating.', 'fa-exclamation-triangle');
+                    return;
+                }
+                showToast(`Thank you for rating ${currentRating} stars!`, 'fa-heart');
+                ratingModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === ratingModal) ratingModal.style.display = 'none';
+                if (e.target === historyModal) historyModal.style.display = 'none';
+            });
+
+            // --- Helper Functions ---
+            function showLoading(show) {
+                loader.style.display = show ? 'block' : 'none';
+                generateBtn.disabled = show;
+                if (show) {
+                    generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+                } else {
+                    generateBtn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Generate Blog';
+                }
+            }
+
+            function showError(msg) {
+                errorMessage.textContent = msg;
+                errorMessage.style.display = 'block';
+            }
+
+            function clearError() {
+                errorMessage.textContent = '';
+                errorMessage.style.display = 'none';
+            }
+
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, function(m) {
+                    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+                });
+            }
+        });
+    </script>
+</body>
+</html>
